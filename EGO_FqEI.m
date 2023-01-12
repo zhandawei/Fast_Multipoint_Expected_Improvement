@@ -1,7 +1,7 @@
 % The matlab code of the fast multipoint expected improvement
 % Dawei Zhan, Yun Meng and Huanlai Xing. A Fast Multi-Point Expected
 % Improvement for Parallel Expesive Optimization. IEEE Transactions on
-% Evolutioanry Compuatation, 2020, DOI: 10.1109/TEVC.2022.3168060
+% Evolutioanry Compuatation, 2022, DOI: 10.1109/TEVC.2022.3168060
 clearvars; close all;
 % setting of the problem
 fun_name = 'Fun_Rosenbrock';
