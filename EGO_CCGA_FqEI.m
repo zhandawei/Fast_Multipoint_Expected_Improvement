@@ -23,13 +23,13 @@ iteration = 0;
 % the current best solution
 fmin = min(sample_y);
 % print the current information to the screen
-fprintf('EGO-FqEI on %d-D %s function, iteration: %d, evaluation: %d, current best solution: %.2f\n',num_vari,fun_name,iteration,evaluation,fmin);
+fprintf('EGO-CCGA-FqEI on %d-D %s function, iteration: %d, evaluation: %d, current best solution: %.2f\n',num_vari,fun_name,iteration,evaluation,fmin);
 % the iteration
 while evaluation < max_evaluation
     % build (or rebuild) the initial Kriging model
     kriging_model = Kriging_Train(sample_x,sample_y,lower_bound,upper_bound,1*ones(1,num_vari),0.001*ones(1,num_vari),1000*ones(1,num_vari));
     % maximize the qEI function
-    [best_x,max_EI]= Optimizer_GA(@(x)-Infill_FqEI(x,kriging_model,fmin),num_vari*num_q,repmat(lower_bound,1,num_q),repmat(upper_bound,1,num_q),num_vari*num_q,100);
+    [best_x,max_EI]= Optimizer_CCGA(@(x)-Infill_FqEI(x,kriging_model,fmin),num_vari,lower_bound,upper_bound,num_vari,100,num_q);
     infill_x = reshape(best_x,num_vari,[])';
     % evaluating the candidate with the real function
     infill_y = feval(fun_name,infill_x);
@@ -41,7 +41,9 @@ while evaluation < max_evaluation
     iteration = iteration + 1;
     fmin = min(sample_y);
     % print the current information to the screen
-    fprintf('EGO-FqEI on %d-D %s function, iteration: %d, evaluation: %d, current best solution: %.2f\n',num_vari,fun_name,iteration,evaluation,fmin);
+    fprintf('EGO-CCGA-FqEI on %d-D %s function, iteration: %d, evaluation: %d, current best solution: %.2f\n',num_vari,fun_name,iteration,evaluation,fmin);
 end
+
+
 
 
