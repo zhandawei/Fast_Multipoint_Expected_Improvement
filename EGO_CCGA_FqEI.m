@@ -29,7 +29,7 @@ while evaluation < max_evaluation
     % build (or rebuild) the initial Kriging model
     kriging_model = Kriging_Train(sample_x,sample_y,lower_bound,upper_bound,1*ones(1,num_vari),0.001*ones(1,num_vari),1000*ones(1,num_vari));
     % maximize the qEI function
-    [best_x,max_EI]= Optimizer_CCGA(@(x)-Infill_FqEI(x,kriging_model,fmin),num_vari,lower_bound,upper_bound,num_vari,100,num_q);
+    [best_x,max_EI]= Optimizer_CCGA(kriging_model,num_vari,lower_bound,upper_bound,num_vari,100,num_q,fmin);
     infill_x = reshape(best_x,num_vari,[])';
     % evaluating the candidate with the real function
     infill_y = feval(fun_name,infill_x);
